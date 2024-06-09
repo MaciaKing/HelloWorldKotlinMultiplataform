@@ -14,16 +14,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import helloworld.composeapp.generated.resources.Res
 import helloworld.composeapp.generated.resources.compose_multiplatform
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
+        Navigator(screen = MainScreen())
+    }
+}
+
+class MainScreen:Screen {
+    @OptIn(ExperimentalResourceApi::class)
+    @Composable
+    override fun Content(){
         var name: String by remember { mutableStateOf("") }
         Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(8.dp))
