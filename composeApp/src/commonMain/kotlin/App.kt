@@ -1,5 +1,8 @@
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,11 +14,14 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -35,6 +41,7 @@ class MainScreen:Screen {
     @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content(){
+        var navigator = LocalNavigator.currentOrThrow
         var name: String by remember { mutableStateOf("") }
         Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(8.dp))
@@ -50,8 +57,32 @@ class MainScreen:Screen {
                 }else {
                     Text("Hola $name", fontSize = 25.sp)
                 }
-
+            }
+            Spacer(modifier = Modifier.height(50.dp))
+            Button(onClick = {
+                navigator.push(SecondScreen())
+            }){
+                Text( "Pasamos a la segunda pantalla")
             }
         }
+    }
+}
+
+
+class SecondScreen:Screen{
+    @Composable
+    override fun Content(){
+        val navigator = LocalNavigator.currentOrThrow
+        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
+            Text("Segunda Pantalla", fontSize = 26.sp, color = Color.Blue )
+            Spacer(modifier = Modifier.height(50.dp))
+            Button(onClick = {
+                //navigator.push(MainScreen())
+                navigator.pop()
+            }){
+                Text( "Volvemos a la pantalla principal")
+            }
+        }
+
     }
 }
