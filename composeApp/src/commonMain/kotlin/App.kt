@@ -22,6 +22,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.transitions.FadeTransition
+import cafe.adriel.voyager.transitions.ScaleTransition
+import cafe.adriel.voyager.transitions.SlideTransition
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -33,7 +36,11 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Preview
 fun App() {
     MaterialTheme {
-        Navigator(screen = MainScreen())
+        Navigator(screen = MainScreen()){navigator: Navigator ->
+            SlideTransition(navigator)
+            //FadeTransition(navigator)
+            //ScaleTransition(navigator)
+        }
     }
 }
 
