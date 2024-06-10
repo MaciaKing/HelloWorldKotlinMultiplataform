@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import bottombar.BottomBarScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
@@ -70,6 +71,12 @@ class MainScreen:Screen {
                 navigator.push(SecondScreen())
             }){
                 Text( "Pasamos a la segunda pantalla")
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Button(onClick = {
+                navigator.push(BottomBarScreen())
+            }){
+                Text( "Bottom Bar")
             }
         }
     }
